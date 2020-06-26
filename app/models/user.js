@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const surveySchema = require('./survey')
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -10,6 +11,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  surveys: [surveySchema.schema],
   token: String
 }, {
   timestamps: true,
