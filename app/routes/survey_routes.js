@@ -33,13 +33,17 @@ router.get('/survey', requireToken, (req, res, next) => {
   console.log(req)
   User.findById(req.user.id)
     .then(user => {
-      // `examples` will be an array of Mongoose documents
-      // we want to convert each one to a POJO, so we use `.map` to
-      // apply `.toObject` to each one
-      return user.surveys.map(disc => disc.toObject())
+      // return status 201, the email, and the new token
+      res.status(201).json({ user: user.toObject() })
     })
-    // respond with status 200 and JSON of the examples
-    .then(surveys => res.status(200).json({ surveys: surveys }))
+    // .then(user => {
+    //   // `examples` will be an array of Mongoose documents
+    //   // we want to convert each one to a POJO, so we use `.map` to
+    //   // apply `.toObject` to each one
+    //   return user.surveys.map(disc => disc.toObject())
+    // })
+    // // respond with status 200 and JSON of the examples
+    // .then(surveys => res.status(200).json({ surveys: surveys }))
     // if an error occurs, pass it to the handler
     .catch(next)
 })
